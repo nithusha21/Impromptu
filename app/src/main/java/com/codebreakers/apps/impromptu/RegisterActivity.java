@@ -15,17 +15,17 @@ public class RegisterActivity extends Activity
 {
   private final static java.text.SimpleDateFormat SIMPLE_DATE_FORMAT = new java.text.SimpleDateFormat( "yyyy/MM/dd" );
 
-  private EditText emailField;
+  private EditText email;
   private EditText nameField;
-  private EditText passwordField;
+  private EditText password;
   private EditText phoneNumber;
 
 
   private Button registerButton;
 
-  private String email;
+  private String emailstring;
   private String name;
-  private String password;
+  private String passwordstring;
   private String phone;
 
 
@@ -40,9 +40,10 @@ public class RegisterActivity extends Activity
   }
 
   private void initUI()
-  {emailField = (EditText) findViewById( R.id.emailField );
+  {
+    email = (EditText) findViewById( R.id.email );
     nameField = (EditText) findViewById( R.id.nameField );
-    passwordField = (EditText) findViewById( R.id.passwordField );
+    password = (EditText) findViewById( R.id.password );
     phoneNumber = (EditText)findViewById(R.id.phoneNumber);
 
     registerButton = (Button) findViewById( R.id.registerButton );
@@ -59,9 +60,9 @@ public class RegisterActivity extends Activity
 
   private void onRegisterButtonClicked()
   {
-    String emailText = emailField.getText().toString().trim();
+    String emailText = email.getText().toString().trim();
     String nameText = nameField.getText().toString().trim();
-    String passwordText = passwordField.getText().toString().trim();
+    String passwordText = password.getText().toString().trim();
     String phoneText = phoneNumber.getText().toString().trim();
 
 
@@ -87,7 +88,7 @@ public class RegisterActivity extends Activity
 
     if( !emailText.isEmpty() )
     {
-      email = emailText;
+      emailstring = emailText;
     }
 
     if( !nameText.isEmpty() )
@@ -104,7 +105,7 @@ public class RegisterActivity extends Activity
 
     if( !passwordText.isEmpty() )
     {
-      password = passwordText;
+      passwordstring = passwordText;
     }
 
     user = new BackendlessUser();
@@ -113,7 +114,7 @@ public class RegisterActivity extends Activity
 
     if( email != null )
     {
-      user.setProperty( "email", email );
+      user.setProperty( "email", emailstring );
     }
 
     if( phone != null )
@@ -130,7 +131,7 @@ public class RegisterActivity extends Activity
 
     if( password != null )
     {
-      user.setProperty( "password", password );
+      user.setProperty( "password", passwordstring );
     }
 
     Backendless.UserService.register( user, new DefaultCallback<BackendlessUser>( RegisterActivity.this )
@@ -139,7 +140,7 @@ public class RegisterActivity extends Activity
       public void handleResponse( BackendlessUser response )
       {
         super.handleResponse( response );
-        startActivity( new Intent( RegisterActivity.this, RegistrationSuccessActivity.class ) );
+        startActivity( new Intent( RegisterActivity.this, MainControlActivity.class ) );
         finish();
       }
     } );
