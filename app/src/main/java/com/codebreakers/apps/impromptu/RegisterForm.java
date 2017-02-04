@@ -3,7 +3,7 @@ package com.codebreakers.apps.impromptu;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.codebreakers.apps.impromtu.R;
+import com.codebreakers.apps.impromptu.R;
 
 public class RegisterForm extends AppCompatActivity {
 
