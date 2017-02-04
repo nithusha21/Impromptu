@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tester.findRestaurants(12.9845,80.2330);
+        //tester.findRestaurants(12.9845,80.2330);
         initUI();
 
         Backendless.setUrl( Defaults.SERVER_URL );
