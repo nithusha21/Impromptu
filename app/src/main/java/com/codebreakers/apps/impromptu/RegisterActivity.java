@@ -3,6 +3,7 @@ package com.codebreakers.apps.impromptu;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -145,8 +146,9 @@ public class RegisterActivity extends Activity
     {
       user.setProperty( "password", passwordstring );
     }
-
-    user.setProperty("deviceID", Backendless.Messaging.getDeviceRegistration().getDeviceId());
+    Backendless.Messaging.getDeviceRegistration();
+    Log.i("deviceID",Backendless.Messaging.getDeviceRegistration().getDeviceId());
+//    user.setProperty("deviceID", Backendless.Messaging.getDeviceRegistration().getDeviceId());
 
     Backendless.UserService.register( user, new DefaultCallback<BackendlessUser>( RegisterActivity.this )
     {
