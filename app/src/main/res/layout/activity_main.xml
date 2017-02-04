@@ -19,12 +19,9 @@
         android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/username"
+        android:id="@+id/identityField"
         android:hint=" Username"
         android:textColorHint="#fff"
-        android:id="@+id/identityField"
-        android:hint="Username"
-        android:textColorHint="#000"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <EditText
@@ -69,7 +66,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Register"
+        android:id="@+id/registerLink"
         android:text="Register"
         android:background="@android:color/transparent"
         android:textColor="#000"/>
