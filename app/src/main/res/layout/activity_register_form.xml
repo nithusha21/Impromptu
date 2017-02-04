@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.codebreakers.apps.impromptu.RegisterForm">
+    tools:context="com.codebreakers.apps.impromptu.RegisterActivity">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="80dp"
@@ -17,19 +17,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/newlogo"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Username :"
+            android:text="Name :"
             android:textColor="#000"
             />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Username"
-            android:id="@+id/username"
+            android:hint="Name"
+            android:textColorHint="#000"
+            android:layout_marginLeft="40dp"
+            android:id="@+id/nameField"
             />
-    </LinearLayout>
+        </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,12 +48,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="E-Mail ID :"
+            android:textColor="#000"
             />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:hint="E-Mail"
-            android:id="@+id/EMail"/>
+            android:textColorHint="#000"
+            android:id="@+id/email"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -53,12 +66,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password :"
+            android:textColor="#000"
             />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:hint="Password"
-            android:id="@+id/RegisterPassword"
+            android:textColorHint="#000"
+            android:id="@+id/password"
             android:inputType="textPassword"/>
     </LinearLayout>
     <LinearLayout
@@ -70,12 +86,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone No :"
+            android:textColor="#000"
             />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/PhoneNumber"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/phoneNumber"
             android:hint="Phone Number"
+            android:textColorHint="#000"
             />
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textColor="#000"
+        android:background="@android:color/transparent"
+        android:id="@+id/registerButton"
+        android:layout_marginTop="40dp"/>
 </LinearLayout>

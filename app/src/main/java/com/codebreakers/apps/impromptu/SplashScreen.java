@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 
 import com.codebreakers.apps.impromptu.R;
 
@@ -31,7 +32,7 @@ public class SplashScreen extends Activity {
 
         mprogressBar = (ProgressBar) findViewById(R.id.progressBar);
         ObjectAnimator anim = ObjectAnimator.ofInt(mprogressBar, "progress", 0, 100);
-        anim.setDuration(4000);
+        anim.setDuration(2000);
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
 
