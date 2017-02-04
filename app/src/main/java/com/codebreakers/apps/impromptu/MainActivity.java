@@ -11,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.codebreakers.apps.impromptu.R;
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 
@@ -21,12 +20,13 @@ public class MainActivity extends AppCompatActivity {
     private EditText identityField, passwordField;
     private Button loginButton;
     private CheckBox rememberLoginBox;
-    RestaurantFinder tester = new RestaurantFinder();
+    //RestaurantFinder tester = new RestaurantFinder();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main);
         //tester.findRestaurants(12.9845,80.2330);
         initUI();
@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     private void initUI()
     {
         registerLink = (TextView) findViewById( R.id.registerLink );
-
         identityField = (EditText) findViewById( R.id.identityField );
         passwordField = (EditText) findViewById( R.id.passwordField );
         rememberLoginBox = (CheckBox) findViewById( R.id.rememberLoginBox );

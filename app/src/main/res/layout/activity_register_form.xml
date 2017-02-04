@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.codebreakers.apps.impromptu.RegisterActivity">
+    tools:context="com.codebreakers.apps.impromptu.RegisterActivity"
+    android:background="@drawable/backv3">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="80dp"
@@ -28,11 +29,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name :"
+            android:textColor="#000"
             />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Name"
+            android:textColorHint="#000"
             android:layout_marginLeft="40dp"
             android:id="@+id/nameField"
             />
@@ -46,12 +49,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="E-Mail ID :"
+            android:textColor="#000"
             />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:hint="E-Mail"
+            android:textColorHint="#000"
             android:id="@+id/emailField"/>
     </LinearLayout>
     <LinearLayout
@@ -62,12 +67,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password :"
+            android:textColor="#000"
             />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:hint="Password"
+            android:textColorHint="#000"
             android:id="@+id/passwordField"
             android:inputType="textPassword"/>
     </LinearLayout>
@@ -80,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Phone No :"
+            android:textColor="#000"
             />
         <EditText
             android:layout_width="wrap_content"
@@ -87,12 +95,15 @@
             android:layout_marginLeft="15dp"
             android:id="@+id/phoneNumber"
             android:hint="Phone Number"
+            android:textColorHint="#000"
             />
     </LinearLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
+        android:textColor="#000"
+        android:background="@android:color/transparent"
         android:id="@+id/registerButton"
         android:layout_marginTop="40dp"/>
 </LinearLayout>
