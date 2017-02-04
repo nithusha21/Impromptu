@@ -30,13 +30,16 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
         android:hint="Enter Password"
         android:textColorHint="#000"
         style="@android:style/Widget.DeviceDefault.AutoCompleteTextView"
+        android:textColorHint="#fff"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:inputType="textPassword" />
 
+        android:inputType="textPassword"
+        android:id="@+id/passwordField"
+        style="@style/Widget.AppCompat.Light.AutoCompleteTextView" />
 
     <CheckBox android:id="@+id/rememberLoginBox"
         android:layout_width="wrap_content"
@@ -52,8 +55,7 @@
         android:id="@+id/loginButton"
         android:text="Sign In"
         android:background="@android:color/transparent"
-        style="@style/Widget.AppCompat.Button"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
+        android:textColor="#fff"/>
 
     <TextView
         android:layout_width="match_parent"
