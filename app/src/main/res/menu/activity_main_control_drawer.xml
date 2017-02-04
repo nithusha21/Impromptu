@@ -4,13 +4,17 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/AddFriend"
-            android:title="Add Friends" />
+            android:title="Add Friends"
+            android:icon="@drawable/addfriendclip"/>
         <item
             android:id="@+id/CreateEvent"
-            android:title="Create Event" />
+            android:title="Create Event"
+            android:icon="@drawable/createevent"
+            />
         <item
             android:id="@+id/Settings"
-            android:title="Settings" />
+            android:title="Settings"
+            android:icon="@drawable/settings"/>
 
     </group>
 
