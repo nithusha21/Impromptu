@@ -92,13 +92,18 @@ public class RestaurantFinder {
     }
 
     private void postRequestFunction(String response){
-
         parseGeocodeResponse(response);
-        Log.i("INFO", Arrays.toString(ratings));
-        Log.i("INFO", Arrays.toString(votes));
-        Log.i("INFO", Arrays.toString(priceForTwo));
-        Log.i("INFO", Arrays.toString(names));
-        Log.i("INFO", Arrays.toString(getWeightedRatings()));
+        double[] laats = {12.991773,13,12.98}, loons = {80.232156,80.21,80.21};
+        String[] prefs = {"","",""};
+        double[] price = {500,350,750};
+//        Log.i("INFO", Arrays.toString(ratings));
+//        Log.i("INFO", Arrays.toString(votes));
+//        Log.i("INFO", Arrays.toString(priceForTwo));
+//        Log.i("INFO", Arrays.toString(restCuisines));
+//        Log.i("INFO", Arrays.toString(getWeightedRatings()));
+        Log.i("old list", Arrays.toString(names));
+        Log.i("final rank list", Arrays.toString((rankRestaurants(laats,loons,prefs,price))));
+       // Log.i("length",(rankRestaurants(laats,loons,prefs,price)).length+"");
 
     }
 
@@ -160,9 +165,100 @@ public class RestaurantFinder {
         return wrs;
     }
 
-    public String[] rankRestaurants(int[] lats, int[] longs, String[] prefs){
-        String[] rankList = new String[lats.length];
-        return rankList;
+    public String[] rankRestaurants(double[] lats, double[] lons, String[] prefs, double[] pricePrefs){
+        int numRests = lat.length;
+        int numPpl = prefs.length;
+        String[] rankList = new String[numRests];
+
+        double[] wrs = getWeightedRatings();
+        normalize(wrs);
+
+        double[] dists= new double[numRests];
+        for(int i=0;i<numRests;i++){
+            double x=lat[i], y=lon[i];
+
+            for(int j=0;j<numPpl;j++){
+                dists[i]+=Math.pow(x-lats[j],2)+Math.pow(y-lons[j],2);
+            }
+            Log.i("lat[i],lon[i]",lat[i]+","+lon[i]);
+            dists[i] = 1/dists[i];
+        }
+        normalize(dists);
+//        for(int i=0;i<numRests;i++){
+//            dists[i] = 1-dists[i];
+//        }
+
+        double[] priceHappyPpl = new double[numRests];
+        for(int i=0;i<numRests;i++){
+            for(int j=0;j<numPpl;j++){
+                if(priceForTwo[i]<pricePrefs[j]*2)priceHappyPpl[i]++;
+            }
+        }
+        Log.i("Price happy ppl",Arrays.toString(priceHappyPpl));
+        normalize(priceHappyPpl);
+        Log.i("Price happy ppl",Arrays.toString(priceHappyPpl));
+
+        double[] prefHappyPpl = new double[numRests];
+        for(int i=0;i<numRests;i++){
+            String[] cu = restCuisines[i].split(",");
+            for(int j=0;j<numPpl;j++){
+                String[] prefcu = prefs[j].split(",");
+                outer:for(int p=0;p<cu.length;p++){
+                    for(int q=0;q<prefcu.length;q++){
+                        if(cu[p].trim().equals(prefs[j].trim())){
+                            prefHappyPpl[i]++;
+                            break outer;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        normalize(prefHappyPpl);
+        Log.i("pref happy ppl", Arrays.toString(prefHappyPpl));
+        Log.i("wrs", Arrays.toString(wrs));
+        Log.i("price happy ppl", Arrays.toString(priceHappyPpl));
+        Log.i("dists", Arrays.toString(dists));
+        double[] restGoodnessIndex = new double[numRests];
+        for(int i=0;i<numRests;i++){
+            restGoodnessIndex[i] = dists[i]+prefHappyPpl[i]+priceHappyPpl[i]+wrs[i];
+        }
+
+        Log.i("restGoodnessIdiec", Arrays.toString(restGoodnessIndex));
+
+        int index=0;
+        double min = restGoodnessIndex[0];
+        double largestSorted=0;
+        for(int i=0;i<numRests;i++){
+            for(int j=0;j<numRests;j++){
+                if(restGoodnessIndex[j]<=largestSorted)continue;
+                if(restGoodnessIndex[j]<min){
+                    min = restGoodnessIndex[j];
+                    index = j;
+                }
+            }
+            rankList[i] = names[index];
+            largestSorted = min;
+            min = Integer.MAX_VALUE;
+        }
+
+        String[] rankListReversed = new String[numRests];
+        for(int i=0;i<numRests;i++){
+            rankListReversed[i] = rankList[numRests-i-1];
+        }
+
+        return rankListReversed;
     }
 
+    private void normalize(double[] arr){
+        double s=0;
+        for(int i=0;i<arr.length;i++){
+            s+=arr[i];
+        }
+        if(s==0)return;
+        for(int i=0;i<arr.length;i++){
+            arr[i]/=s;
+        }
+    }
 }
