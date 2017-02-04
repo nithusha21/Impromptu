@@ -32,11 +32,20 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Invite To Meetup"
-                android:id="@+id/Proceed"
+                android:text="ISubmit Preferences"
+                android:id="@+id/submitPreferences"
                 android:layout_gravity="center_horizontal|top" />
-
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="10px"
+                android:id="@+id/PriceSlider"
+                android:max="4000" />
         </LinearLayout>
     </ScrollView>
+
+
 
 </RelativeLayout>

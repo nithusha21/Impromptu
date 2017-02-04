@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class PreferenceForm extends AppCompatActivity {
 
@@ -28,5 +30,26 @@ public class PreferenceForm extends AppCompatActivity {
                 CuiList[i].setLayoutParams(new FrameLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
                 Cuisine.addView(CuiList[i]);
             }
+        final TextView value = new TextView(this);
+        value.setText("0");
+        SeekBar price = (SeekBar)findViewById(R.id.PriceSlider);
+        price.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                value.setText(""+(i));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        Cuisine.addView(value);
     }
 }
