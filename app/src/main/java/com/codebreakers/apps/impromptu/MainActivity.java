@@ -2,6 +2,7 @@ package com.codebreakers.apps.impromptu;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main);
-        tester.findRestaurants(12.9845,80.2330);
+        //tester.findRestaurants(12.9845,80.2330);
         initUI();
 
         Backendless.setUrl( Defaults.SERVER_URL );
@@ -74,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
     private void initUI()
     {
@@ -84,24 +84,14 @@ public class MainActivity extends AppCompatActivity {
         rememberLoginBox = (CheckBox) findViewById( R.id.rememberLoginBox );
         loginButton = (Button) findViewById( R.id.loginButton );
         String urlString = "https://api.backendless.com/v1/data/Users";
+        try {
+            URL url = new URL(urlString);
 
-        /*try{
-            JSONObject jsonObject = getJSONObjectFromURL(urlString);
-            String name[];
-            Log.i("JSON", jsonObject.toString());
-            // Parse your json here
-            // JSONObject sys  = jsonObject.getJSONObject("data");
-
-
-        } catch (IOException e) {
+            getJSON task = new getJSON();
+            task.execute(new URL(urlString));
+        }catch (Exception e){
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
-
-
-
+        }
         String tempString = getResources().getString( R.string.register_text );
         SpannableString underlinedContent = new SpannableString( tempString );
         underlinedContent.setSpan( new UnderlineSpan(), 0, tempString.length(), 0 );
@@ -131,42 +121,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static JSONObject getJSONObjectFromURL(String urlString) throws IOException, JSONException {
-
-        URL url = new URL(urlString);
-
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-        urlConnection.setRequestMethod("GET");
-        urlConnection.setRequestProperty("application-Id", "48449D26-77AF-D84C-FFBC-96A6E338F700");
-        urlConnection.setRequestProperty("secret-key","48449D26-77AF-D84C-FFBC-96A6E338F700");
-        //urlConnection.setReadTimeout(10000 );
-        //urlConnection.setConnectTimeout(15000);
-
-        if(urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-            Log.i("HTTP", "Failed");
-        }
-
-        BufferedReader br=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-        char[] buffer = new char[1024];
-
-        String jsonString;
-
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line+"\n");
-        }
-        br.close();
-
-        jsonString = sb.toString();
-
-        System.out.println("JSON: " + jsonString);
-
-        return new JSONObject(jsonString);
-    }
-
     public void onLoginButtonClicked()
     {
         String identity = identityField.getText().toString();
@@ -191,6 +145,55 @@ public class MainActivity extends AppCompatActivity {
     {
         startActivity( new Intent( this, RegisterActivity.class ) );
         finish();
+    }
+    private class getJSON extends AsyncTask<URL, Void, JSONObject>{
+        @Override
+        protected JSONObject doInBackground(URL... urls){
+
+
+            try {
+                HttpURLConnection urlConnection = (HttpURLConnection) urls[0].openConnection();
+                urlConnection.setRequestMethod("GET");
+
+                urlConnection.setConnectTimeout(30000);
+                urlConnection.setReadTimeout(30000);
+
+                urlConnection.addRequestProperty("application-Id", "48449D26-77AF-D84C-FFBC-96A6E338F700");
+                urlConnection.addRequestProperty("secret-key","823D3BBA-94A9-3405-FFCE-D3F4BD1C1100");
+                urlConnection.addRequestProperty("Content-type", "application/json");
+                urlConnection.connect();
+                if(urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    Log.i("HTTP", "Failed");
+                }
+                BufferedReader br=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+                char[] buffer = new char[1024];
+
+                String jsonString;
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line+"\n");
+                }
+                br.close();
+
+                jsonString = sb.toString();
+
+                System.out.println("JSON: " + jsonString);
+                return new JSONObject(jsonString);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+                return null;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            Log.i("Output",jsonObject.toString());
+
+        }
     }
 
 }
