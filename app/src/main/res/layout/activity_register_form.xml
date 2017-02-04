@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.codebreakers.apps.impromptu.RegisterActivity"
-    android:background="@drawable/backv3">
+    android:background="@drawable/newback2">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="80dp"

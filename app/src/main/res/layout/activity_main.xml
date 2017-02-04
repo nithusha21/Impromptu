@@ -10,42 +10,41 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     tools:context="com.codebreakers.apps.impromptu.MainActivity"
-    android:background="@drawable/backv2">
+    android:background="@drawable/wtf">
+
     <ImageView
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="140dp"
         android:src="@drawable/newlogo"/>
+
     <EditText
         android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/identityField"
         android:hint=" Username"
-        android:textColorHint="#fff"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textColorHint="#000"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/password"
         android:hint="Enter Password"
-        android:textColorHint="#fff"
+        android:textColorHint="#000"
         style="@android:style/Widget.DeviceDefault.AutoCompleteTextView"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:inputType="textPassword" />
-        android:id="@+id/passwordField"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:textColorHint="#262626"
-        style="@style/Widget.AppCompat.Light.AutoCompleteTextView" />
+
 
     <CheckBox android:id="@+id/rememberLoginBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remember Me"
-        android:textColorHint="#fff"
         android:textColor="#000"
-        />
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <Button
         android:layout_width="match_parent"
@@ -53,12 +52,13 @@
         android:id="@+id/loginButton"
         android:text="Sign In"
         android:background="@android:color/transparent"
-        android:textColor="#fff"/>
+        style="@style/Widget.AppCompat.Button"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="190dp"
+        android:paddingTop="240dp"
         android:text="Not A User Yet?"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -69,5 +69,5 @@
         android:id="@+id/registerLink"
         android:text="Register"
         android:background="@android:color/transparent"
-        android:textColor="#000"/>
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 </LinearLayout>
