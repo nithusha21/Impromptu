@@ -72,6 +72,7 @@ public class RestaurantFinder {
             }
             Log.i("INFO", response);
             resp = response;
+            //postRequestFunction();
         }
     }
 
