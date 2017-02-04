@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,6 +15,15 @@ import android.widget.TextView;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,6 +83,22 @@ public class MainActivity extends AppCompatActivity {
         passwordField = (EditText) findViewById( R.id.passwordField );
         rememberLoginBox = (CheckBox) findViewById( R.id.rememberLoginBox );
         loginButton = (Button) findViewById( R.id.loginButton );
+        String urlString = "https://api.backendless.com/v1/data/Users";
+
+        try{
+            JSONObject jsonObject = getJSONObjectFromURL(urlString);
+            String name[];
+            Log.i("JSON", jsonObject.toString());
+            // Parse your json here
+            // JSONObject sys  = jsonObject.getJSONObject("data");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
 
 
@@ -102,6 +128,43 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    public static JSONObject getJSONObjectFromURL(String urlString) throws IOException, JSONException {
+
+        URL url = new URL(urlString);
+
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+        urlConnection.setRequestMethod("GET");
+        urlConnection.setRequestProperty("application-Id", "48449D26-77AF-D84C-FFBC-96A6E338F700");
+        urlConnection.setRequestProperty("secret-key","48449D26-77AF-D84C-FFBC-96A6E338F700");
+        //urlConnection.setReadTimeout(10000 );
+        //urlConnection.setConnectTimeout(15000);
+
+        if(urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            Log.i("HTTP", "Failed");
+        }
+
+        BufferedReader br=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+        char[] buffer = new char[1024];
+
+        String jsonString;
+
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line+"\n");
+        }
+        br.close();
+
+        jsonString = sb.toString();
+
+        System.out.println("JSON: " + jsonString);
+
+        return new JSONObject(jsonString);
     }
 
     public void onLoginButtonClicked()
