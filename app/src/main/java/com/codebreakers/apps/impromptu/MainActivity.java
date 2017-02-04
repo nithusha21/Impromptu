@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton = (Button) findViewById( R.id.loginButton );
         String urlString = "https://api.backendless.com/v1/data/Users";
 
-        try{
+        /*try{
             JSONObject jsonObject = getJSONObjectFromURL(urlString);
             String name[];
             Log.i("JSON", jsonObject.toString());
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
 

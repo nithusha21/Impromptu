@@ -53,7 +53,7 @@ public class createEvent extends Fragment {
             @Override
             public void onClick(View view) {
                 DialogFragment f =  new inviteDialogFragment();
-                f.show(getSupportFragmentManager(), "invite");
+                f.show(getActivity().getSupportFragmentManager(), "invite");
             }
         });
         return v;
