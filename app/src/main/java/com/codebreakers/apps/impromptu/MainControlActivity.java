@@ -1,5 +1,6 @@
 package com.codebreakers.apps.impromptu;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -24,7 +25,11 @@ public class MainControlActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String user;
         setContentView(R.layout.activity_main_control);
+        SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
+        user = prefs.getString("username", "UNKNOWN");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
