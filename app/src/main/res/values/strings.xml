@@ -27,4 +27,10 @@
     <string name="default_registered_text">Registered successfully!</string>
 
     <string name="registration_success_message">Thank you for registering with the %1$s. Click the button below to proceed to the login.</string>
+    <string name="title_activity_main_control">MainControlActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
