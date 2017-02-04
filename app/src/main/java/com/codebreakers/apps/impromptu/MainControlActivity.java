@@ -75,7 +75,7 @@ public class MainControlActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.AddFriend) {
-            // Handle the camera action
+            addFriendOnClickListener();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -89,8 +89,7 @@ public class MainControlActivity extends AppCompatActivity
         return true;
     }
 
-    private void onLogoutButtonClicked()
-    {
+    private void onLogoutButtonClicked() {
         Backendless.UserService.logout( new DefaultCallback<Void>( this )
         {
             @Override
@@ -110,6 +109,9 @@ public class MainControlActivity extends AppCompatActivity
                     super.handleFault( fault );
             }
         } );
+
+    }
+    private void addFriendOnClickListener() {
 
     }
 
