@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "543151196737",
+    "firebase_url": "https://impromptu-5e67a.firebaseio.com",
+    "project_id": "impromptu-5e67a",
+    "storage_bucket": "impromptu-5e67a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543151196737:android:bf9276662b0a9a45",
+        "android_client_info": {
+          "package_name": "com.codebreakers.apps.impromptu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543151196737-h6d4fccbo4tsfiu03i2hnvu8qakf1n8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALmBrHmN3ytMgmXqihoMMoe6D4PuBMemQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543151196737-h6d4fccbo4tsfiu03i2hnvu8qakf1n8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
