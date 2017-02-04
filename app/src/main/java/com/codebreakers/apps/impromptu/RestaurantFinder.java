@@ -98,6 +98,7 @@ public class RestaurantFinder {
         Log.i("INFO", Arrays.toString(votes));
         Log.i("INFO", Arrays.toString(priceForTwo));
         Log.i("INFO", Arrays.toString(names));
+        Log.i("INFO", Arrays.toString(getWeightedRatings()));
 
     }
 
@@ -140,6 +141,28 @@ public class RestaurantFinder {
         } catch (JSONException e) {
             Log.e("ERROR",e.getMessage());
         }
+    }
+
+
+    private double[] getWeightedRatings(){
+        int l = ratings.length;
+        double[] wrs = new double[l];
+        double s=0;
+        for(int i=0;i<l;i++){
+            s+=ratings[i];
+        }
+        double meanVote = s/l;
+
+        for(int i=0;i<l;i++){
+            int v =votes[i];
+            wrs[i] = v/((double)v+MINIMUM_VOTES)*ratings[i] + MINIMUM_VOTES/((double)v+MINIMUM_VOTES)*meanVote;
+        }
+        return wrs;
+    }
+
+    public String[] rankRestaurants(int[] lats, int[] longs, String[] prefs){
+        String[] rankList = new String[lats.length];
+        return rankList;
     }
 
 }
