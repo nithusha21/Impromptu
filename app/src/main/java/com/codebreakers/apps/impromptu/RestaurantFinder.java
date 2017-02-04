@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -18,7 +19,8 @@ import java.net.URL;
 public class RestaurantFinder {
 
     private final static String ZOMATO_API_KEY = "8e847da3360a94cf26e381cbce62a41a",
-            API_URL = "https://developers.zomato.com/api/v2.1/";
+            API_URL = "https://developers.zomato.com/api/v2.1/",
+            urlDelimiter = "\nJSONURLSEPARATOR\n";
     private String resp;
 
     public void findRestaurants(double lat, double lon){
@@ -54,7 +56,7 @@ public class RestaurantFinder {
                         stringBuilder.append(line).append("\n");
                     }
                     bufferedReader.close();
-                    return stringBuilder.toString();
+                    return stringBuilder.toString()+urlDelimiter+url;
                 }
                 finally{
                     urlConnection.disconnect();
@@ -72,8 +74,20 @@ public class RestaurantFinder {
             }
             Log.i("INFO", response);
             resp = response;
-            //postRequestFunction();
+            postRequestFunction(response);
         }
+    }
+
+    private void postRequestFunction(String response){
+        String[] strs = response.split(urlDelimiter);
+        String jsonReply = strs[0], url = strs[1];
+//        Log.i("INFO",url);
+        try {
+            JSONObject restData = new JSONObject(jsonReply);
+        } catch (JSONException e) {
+            Log.e("ERROR",e.getMessage());
+        }
+
     }
 
 }
