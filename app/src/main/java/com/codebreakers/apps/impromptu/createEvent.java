@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
@@ -23,7 +24,7 @@ import com.codebreakers.apps.impromptu.R;
 public class createEvent extends Fragment {
 
     LinearLayout Struct;
-    Button proceed;
+    Button proceed, invite;
 
     public createEvent() {
         // Required empty public constructor
@@ -44,6 +45,14 @@ public class createEvent extends Fragment {
                 //Could Be A point of Error
                 Intent next = new Intent( getActivity(), MainActivity.class);
                 startActivity(next);
+            }
+        });
+
+        invite = (Button) v.findViewById(R.id.invite);
+        invite.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
             }
         });
         return v;
@@ -67,6 +76,5 @@ public class createEvent extends Fragment {
             Struct.addView(FriendsInvite[i]);
         }
     }
-
 
 }

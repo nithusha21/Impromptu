@@ -19,7 +19,12 @@
             android:text="Invite To Meetup"
             android:id="@+id/Proceed"
             android:layout_gravity="center_horizontal|top" />
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Invite New Friend"
+            android:id="@+id/invite"
+            android:layout_gravity="center_horizontal|top" />
     </LinearLayout>
         </ScrollView>
 
