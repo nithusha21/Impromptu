@@ -4,20 +4,14 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/AddFriend"
-            android:icon="@drawable/ic_menu_camera"
             android:title="Add Friends" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/CreateEvent"
+            android:title="Create Event" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/Settings"
+            android:title="Settings" />
+
     </group>
 
 </menu>
