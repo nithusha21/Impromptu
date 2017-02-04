@@ -28,14 +28,29 @@
                 android:layout_height="wrap_content"
                 android:text="Cuisine"
                 />
+
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/money"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Max Price"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="30dp"/>
+
+            </LinearLayout>
             <SeekBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:paddingTop="10px"
+                android:paddingTop="30dp"
+                android:paddingBottom="150dp"
                 android:id="@+id/PriceSlider"
                 android:max="4000" />
             <Button

@@ -50,6 +50,7 @@ public class PreferenceForm extends AppCompatActivity {
 
             }
         });
-        Cuisine.addView(value);
+        LinearLayout mon = (LinearLayout) findViewById(R.id.money);
+        mon.addView(value);
     }
 }
