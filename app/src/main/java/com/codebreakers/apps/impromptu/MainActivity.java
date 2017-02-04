@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText identityField, passwordField;
     private Button loginButton;
     private CheckBox rememberLoginBox;
-    RestaurantFinder tester = new RestaurantFinder();
+    //RestaurantFinder tester = new RestaurantFinder();
 
 
     @Override
@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main);
-        tester.findRestaurants(12.991773, 80.232156);
-
         //tester.findRestaurants(12.9845,80.2330);
         initUI();
 
