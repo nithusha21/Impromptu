@@ -63,7 +63,7 @@ public class RegisterActivity extends Activity
     String nameText = nameField.getText().toString().trim();
     String passwordText = passwordField.getText().toString().trim();
     String phoneText = phoneNumber.getText().toString().trim();
-    phone = phoneText;
+
 
 
     if ( emailText.isEmpty() )
@@ -75,6 +75,11 @@ public class RegisterActivity extends Activity
     if ( passwordText.isEmpty() )
     {
       showToast( "Field 'password' cannot be empty." );
+      return;
+    }
+    if ( phoneText.isEmpty() )
+    {
+      showToast( "Field 'phonenumber' cannot be empty." );
       return;
     }
 
@@ -90,6 +95,11 @@ public class RegisterActivity extends Activity
       name = nameText;
     }
 
+    if( !phoneText.isEmpty() )
+    {
+      phone = phoneText;
+    }
+
 
 
     if( !passwordText.isEmpty() )
@@ -99,12 +109,18 @@ public class RegisterActivity extends Activity
 
     user = new BackendlessUser();
 
-    user.setProperty("phonenumber",phone);
+
 
     if( email != null )
     {
       user.setProperty( "email", email );
     }
+
+    if( phone != null )
+    {
+      user.setProperty("phonenumber",phone);
+    }
+
 
 
     if( name != null )
