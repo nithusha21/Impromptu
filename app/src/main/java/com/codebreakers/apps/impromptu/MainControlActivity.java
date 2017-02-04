@@ -42,6 +42,8 @@ public class MainControlActivity extends AppCompatActivity
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
         user = prefs.getString("username", "UNKNOWN");
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,10 +55,74 @@ public class MainControlActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        get();
 
 
 
     }
+
+    public void get() {
+        String urlString = "https://api.backendless.com/v1/data/Users";
+        try {
+            URL url = new URL(urlString);
+
+            MainControlActivity.getJSON task = new MainControlActivity.getJSON();
+            task.execute(new URL(urlString));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private class getJSON extends AsyncTask<URL, Void, JSONObject>{
+        @Override
+        protected JSONObject doInBackground(URL... urls){
+
+
+            try {
+                HttpURLConnection urlConnection = (HttpURLConnection) urls[0].openConnection();
+                urlConnection.setRequestMethod("GET");
+
+                urlConnection.setConnectTimeout(30000);
+                urlConnection.setReadTimeout(30000);
+
+                urlConnection.addRequestProperty("application-Id", "48449D26-77AF-D84C-FFBC-96A6E338F700");
+                urlConnection.addRequestProperty("secret-key","823D3BBA-94A9-3405-FFCE-D3F4BD1C1100");
+                urlConnection.addRequestProperty("Content-type", "application/json");
+                urlConnection.connect();
+                if(urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    Log.i("HTTP", "Failed");
+                }
+                BufferedReader br=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+                char[] buffer = new char[1024];
+
+                String jsonString;
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line+"\n");
+                }
+                br.close();
+
+                jsonString = sb.toString();
+
+                Log.i("JSON: ",jsonString);
+                return new JSONObject(jsonString);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            Log.i("Output",jsonObject.toString());
+
+        }
+    }
+
 
 
 

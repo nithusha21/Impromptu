@@ -83,15 +83,6 @@ public class MainActivity extends AppCompatActivity {
         passwordField = (EditText) findViewById( R.id.passwordField );
         rememberLoginBox = (CheckBox) findViewById( R.id.rememberLoginBox );
         loginButton = (Button) findViewById( R.id.loginButton );
-        String urlString = "https://api.backendless.com/v1/data/Users";
-        try {
-            URL url = new URL(urlString);
-
-            getJSON task = new getJSON();
-            task.execute(new URL(urlString));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         String tempString = getResources().getString( R.string.register_text );
         SpannableString underlinedContent = new SpannableString( tempString );
         underlinedContent.setSpan( new UnderlineSpan(), 0, tempString.length(), 0 );
@@ -146,54 +137,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity( new Intent( this, RegisterActivity.class ) );
         finish();
     }
-    private class getJSON extends AsyncTask<URL, Void, JSONObject>{
-        @Override
-        protected JSONObject doInBackground(URL... urls){
 
 
-            try {
-                HttpURLConnection urlConnection = (HttpURLConnection) urls[0].openConnection();
-                urlConnection.setRequestMethod("GET");
-
-                urlConnection.setConnectTimeout(30000);
-                urlConnection.setReadTimeout(30000);
-
-                urlConnection.addRequestProperty("application-Id", "48449D26-77AF-D84C-FFBC-96A6E338F700");
-                urlConnection.addRequestProperty("secret-key","823D3BBA-94A9-3405-FFCE-D3F4BD1C1100");
-                urlConnection.addRequestProperty("Content-type", "application/json");
-                urlConnection.connect();
-                if(urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                    Log.i("HTTP", "Failed");
-                }
-                BufferedReader br=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-                char[] buffer = new char[1024];
-
-                String jsonString;
-
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line+"\n");
-                }
-                br.close();
-
-                jsonString = sb.toString();
-
-                System.out.println("JSON: " + jsonString);
-                return new JSONObject(jsonString);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-                return null;
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject jsonObject) {
-            super.onPostExecute(jsonObject);
-            Log.i("Output",jsonObject.toString());
-
-        }
-    }
 
 }
