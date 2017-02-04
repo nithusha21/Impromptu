@@ -42,6 +42,8 @@ public class MainControlActivity extends AppCompatActivity
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
         user = prefs.getString("username", "UNKNOWN");
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,10 +55,12 @@ public class MainControlActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        
 
 
 
     }
+
 
 
 
