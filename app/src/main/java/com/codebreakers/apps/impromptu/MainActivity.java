@@ -1,6 +1,7 @@
 package com.codebreakers.apps.impromptu;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
@@ -112,7 +113,10 @@ public class MainActivity extends AppCompatActivity {
             public void handleResponse( BackendlessUser backendlessUser )
             {
                 super.handleResponse( backendlessUser );
-                startActivity( new Intent( MainActivity.this, MainControlActivity.class ) );
+                SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
+                prefs.edit().putString("username", identityField.getText().toString().trim()).commit();
+                Intent i = new Intent( MainActivity.this, MainControlActivity.class );
+                startActivity(i);
                 finish();
             }
         },rememberLogin );
