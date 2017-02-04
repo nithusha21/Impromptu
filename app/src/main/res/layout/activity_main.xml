@@ -21,17 +21,18 @@
     <EditText
         android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/identityField"
         android:hint=" Username"
         android:inputType="text"
         android:textColorHint="#000"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView" />
+        style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
+        android:inputType="text" />
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:hint="Enter Password"
         android:textColorHint="#000"
         android:textAppearance="@style/TextAppearance.AppCompat"
