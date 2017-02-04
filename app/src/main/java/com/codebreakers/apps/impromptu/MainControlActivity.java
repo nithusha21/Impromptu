@@ -10,6 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.backendless.Backendless;
+import com.backendless.exceptions.BackendlessFault;
+import android.content.Intent;
+
 import static com.codebreakers.apps.impromptu.R.styleable.NavigationView;
 
 public class MainControlActivity extends AppCompatActivity
@@ -58,7 +62,7 @@ public class MainControlActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            logout();
+            onLogoutButtonClicked();
         }
 
         return super.onOptionsItemSelected(item);
@@ -70,7 +74,7 @@ public class MainControlActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.AddFriend) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -84,4 +88,29 @@ public class MainControlActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void onLogoutButtonClicked()
+    {
+        Backendless.UserService.logout( new DefaultCallback<Void>( this )
+        {
+            @Override
+            public void handleResponse( Void response )
+            {
+                super.handleResponse( response );
+                startActivity( new Intent( MainControlActivity.this, MainActivity.class ) );
+                finish();
+            }
+
+            @Override
+            public void handleFault( BackendlessFault fault )
+            {
+                if( fault.getCode().equals( "3023" ) ) // Unable to logout: not logged in (session expired, etc.)
+                    handleResponse( null );
+                else
+                    super.handleFault( fault );
+            }
+        } );
+
+    }
+
 }
