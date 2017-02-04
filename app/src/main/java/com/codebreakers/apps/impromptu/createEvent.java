@@ -43,7 +43,7 @@ public class createEvent extends Fragment {
             @Override
             public void onClick(View v) {
                 //Could Be A point of Error
-                Intent next = new Intent( getActivity(), MainActivity.class);
+                Intent next = new Intent( getActivity(), PreferenceForm.class);
                 startActivity(next);
             }
         });
