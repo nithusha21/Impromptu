@@ -146,7 +146,7 @@ public class RegisterActivity extends Activity
       user.setProperty( "password", passwordstring );
     }
 
-    user.setProperty("deviceID", Backendless.Messaging.getDeviceRegistration().getId());
+    user.setProperty("deviceID", Backendless.Messaging.getDeviceRegistration().getDeviceId());
 
     Backendless.UserService.register( user, new DefaultCallback<BackendlessUser>( RegisterActivity.this )
     {
