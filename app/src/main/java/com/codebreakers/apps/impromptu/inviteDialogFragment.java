@@ -12,11 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 
-public class inviteDialogFragment extends android.app.DialogFragment {
-
-    public inviteDialogFragment() {
-        // Required empty public constructor
-    }
+public class inviteDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -35,6 +31,6 @@ public class inviteDialogFragment extends android.app.DialogFragment {
                 
             }
         });
-        return super.onCreateDialog(savedInstanceState);
+        return builder.create();
     }
 }

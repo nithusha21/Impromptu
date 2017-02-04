@@ -52,7 +52,8 @@ public class createEvent extends Fragment {
         invite.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
+                DialogFragment f =  new inviteDialogFragment();
+                f.show(getSupportFragmentManager(), "invite");
             }
         });
         return v;
