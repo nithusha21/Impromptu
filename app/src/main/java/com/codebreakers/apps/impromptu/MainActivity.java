@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tester.findRestaurants(12.9845,80.2330);
+        //tester.findRestaurants(12.9845,80.2330);
         initUI();
 
         Backendless.setUrl( Defaults.SERVER_URL );
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 super.handleResponse( currentUser );
                                 Backendless.UserService.setCurrentUser( currentUser );
-                                startActivity( new Intent( getBaseContext(), LoginSuccessActivity.class ) );
+                                startActivity( new Intent( getBaseContext(), MainControlActivity.class ) );
                                 finish();
                             }
                         } );
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             public void handleResponse( BackendlessUser backendlessUser )
             {
                 super.handleResponse( backendlessUser );
-                startActivity( new Intent( MainActivity.this, LoginSuccessActivity.class ) );
+                startActivity( new Intent( MainActivity.this, MainControlActivity.class ) );
                 finish();
             }
         },rememberLogin );
