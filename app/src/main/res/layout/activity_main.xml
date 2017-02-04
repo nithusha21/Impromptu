@@ -5,44 +5,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.codebreakers.apps.impromtu.MainActivity">
-
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="com.codebreakers.apps.impromptu.MainActivity"
+    android:background="@drawable/back1">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/newlogo"/>
     <EditText
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/username"
-        android:hint=" Username" />
+        android:hint=" Username"
+        android:textColorHint="#000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/password"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:hint="Enter Password"
+        android:textColorHint="#262626"
+        style="@style/Widget.AppCompat.Light.AutoCompleteTextView" />
 
     <CheckBox android:id="@+id/checkbox_cheese"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remember Me"
+        android:textColorHint="#000"
+        android:textColor="#000"
         />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/SignIn"
-        android:text="Sign In"/>
+        android:text="Sign In"
+        android:background="@android:color/transparent"
+        android:textColor="#fff"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:text="Not A User Yet?"/>
+        android:paddingTop="190dp"
+        android:text="Not A User Yet?"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#000"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Register"
-        android:text="Register"/>
+        android:text="Register"
+        android:background="@android:color/transparent"
+        android:textColor="#fff"/>
 </LinearLayout>
