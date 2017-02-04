@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.codebreakers.apps.impromptu.RegisterActivity"
-    android:background="@drawable/newback2">
+    android:background="@drawable/newback2"
+    app:layout_collapseParallaxMultiplier="1.0">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="80dp"
@@ -57,7 +59,7 @@
             android:layout_marginLeft="20dp"
             android:hint="E-Mail"
             android:textColorHint="#000"
-            android:id="@+id/emailField"/>
+            android:id="@+id/email"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -73,9 +75,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:hint="Password"
             android:textColorHint="#000"
-            android:id="@+id/passwordField"
+            android:id="@+id/password"
             android:inputType="textPassword"/>
     </LinearLayout>
     <LinearLayout
