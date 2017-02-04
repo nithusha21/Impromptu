@@ -4,9 +4,23 @@
     android:layout_height="match_parent"
     tools:context="com.codebreakers.apps.impromptu.createEvent">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="create Event" />
+        android:layout_height="wrap_content"
+        android:id="@+id/FriendsScroll">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/FriendsList">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Invite To Meetup"
+            android:id="@+id/Proceed"
+            android:layout_gravity="center_horizontal|top" />
+
+    </LinearLayout>
+        </ScrollView>
 
 </FrameLayout>
