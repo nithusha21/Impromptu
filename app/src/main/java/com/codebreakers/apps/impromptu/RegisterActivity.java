@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
 
 public class RegisterActivity extends Activity
 {
@@ -86,7 +88,17 @@ public class RegisterActivity extends Activity
     String passwordText = password.getText().toString().trim();
     String phoneText = phoneNumber.getText().toString().trim();
 
+    Backendless.Messaging.registerDevice("543151196737","default", new AsyncCallback<Void>() {
+      @Override
+      public void handleResponse(Void aVoid) {
+        Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
+      }
 
+      @Override
+      public void handleFault(BackendlessFault backendlessFault) {
+        Toast.makeText(RegisterActivity.this, backendlessFault.getMessage(), Toast.LENGTH_SHORT).show();
+      }
+    });
 
     if ( emailText.isEmpty() )
     {
@@ -154,6 +166,8 @@ public class RegisterActivity extends Activity
     {
       user.setProperty( "password", passwordstring );
     }
+
+    user.setProperty("deviceID", Backendless.Messaging.getDeviceRegistration().getDeviceId());
 
     Backendless.UserService.register( user, new DefaultCallback<BackendlessUser>( RegisterActivity.this )
     {

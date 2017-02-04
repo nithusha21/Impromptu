@@ -1,5 +1,6 @@
 package com.codebreakers.apps.impromptu;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,12 +16,10 @@ import android.view.MenuItem;
 
 import com.backendless.Backendless;
 import com.backendless.exceptions.BackendlessFault;
-import android.content.Intent;
-
-import static com.codebreakers.apps.impromptu.R.styleable.NavigationView;
 
 public class MainControlActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,9 @@ public class MainControlActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
+
 
     @Override
     public void onBackPressed() {

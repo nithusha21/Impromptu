@@ -29,5 +29,7 @@ public class AddFriend extends Fragment {
         return inflater.inflate(R.layout.fragment_add_friend, container, false);
     }
 
+    public void getFriendsList(){
 
+    }
 }

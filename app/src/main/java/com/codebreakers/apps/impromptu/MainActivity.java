@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText identityField, passwordField;
     private Button loginButton;
     private CheckBox rememberLoginBox;
-    //RestaurantFinder tester = new RestaurantFinder();
+    RestaurantFinder tester = new RestaurantFinder();
 
 
     @Override
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
 
         tx.setTypeface(custom_font);
+        tester.findRestaurants(12.9845,80.2330);
         initUI();
 
         Backendless.setUrl( Defaults.SERVER_URL );
