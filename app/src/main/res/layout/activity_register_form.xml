@@ -13,7 +13,7 @@
     android:background="@drawable/newback2"
     app:layout_collapseParallaxMultiplier="1.0">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal">
         <ImageView
@@ -24,83 +24,85 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:weightSum="1">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name :"
-            android:textColor="#000"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:hint="Name"
             android:textColorHint="#000"
-            android:layout_marginLeft="40dp"
             android:id="@+id/nameField"
-            />
-        </LinearLayout>
+            android:inputType="text" />
+        <!--</LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">-->
         <TextView
-            android:layout_width="wrap_content"
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="E-Mail ID :"
-            android:textColor="#000"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:hint="E-Mail"
             android:textColorHint="#000"
-            android:id="@+id/email"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:id="@+id/email"
+            android:inputType="text" />
+        <!--</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">-->
         <TextView
+            android:paddingTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password :"
-            android:textColor="#000"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:hint="Password"
             android:textColorHint="#000"
+            android:textColorHighlight="#000"
             android:id="@+id/password"
-            android:inputType="textPassword"/>
-    </LinearLayout>
+            android:inputType="textPassword"
+            style="@android:style/Widget.AutoCompleteTextView" />
+    <!--</LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
+        android:weightSum="1">-->
         <TextView
-            android:layout_width="wrap_content"
+            android:paddingTop="5dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Phone No :"
-            android:textColor="#000"
-            />
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:id="@+id/phoneNumber"
             android:hint="Phone Number"
             android:textColorHint="#000"
-            />
-    </LinearLayout>
+            android:layout_weight="8.62"
+            android:inputType="phone" />
+    <!--</LinearLayout>-->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -109,4 +111,5 @@
         android:background="@android:color/transparent"
         android:id="@+id/registerButton"
         android:layout_marginTop="40dp"/>
+</LinearLayout>
 </LinearLayout>
