@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 
 /**
  * Created by Rajat on 04-02-2017.
@@ -22,6 +24,17 @@ public class RestaurantFinder {
             API_URL = "https://developers.zomato.com/api/v2.1/",
             urlDelimiter = "\nJSONURLSEPARATOR\n";
     private String resp;
+    public JSONArray cuisines;
+    public double[] lat, lon,
+        priceForTwo,
+        ratings;
+    public int[] votes;
+    public String[] names;
+    public String[] restCuisines;
+
+    private static final int MINIMUM_VOTES = 300;
+
+
 
     public void findRestaurants(double lat, double lon){
         URL reqURL;
@@ -79,15 +92,54 @@ public class RestaurantFinder {
     }
 
     private void postRequestFunction(String response){
+
+        parseGeocodeResponse(response);
+        Log.i("INFO", Arrays.toString(ratings));
+        Log.i("INFO", Arrays.toString(votes));
+        Log.i("INFO", Arrays.toString(priceForTwo));
+        Log.i("INFO", Arrays.toString(names));
+
+    }
+
+    private void parseGeocodeResponse(String response){
         String[] strs = response.split(urlDelimiter);
         String jsonReply = strs[0], url = strs[1];
 //        Log.i("INFO",url);
         try {
             JSONObject restData = new JSONObject(jsonReply);
+            cuisines = restData.getJSONObject("popularity").getJSONArray("top_cuisines");
+            JSONArray rests = restData.getJSONArray("nearby_restaurants");
+
+            int i=0;
+            while(!rests.isNull(i)){
+                i++;
+            }
+            int l = i;
+            lat = new double[l];
+            lon = new double[l];
+            priceForTwo = new double[l];
+            ratings = new double[l];
+            votes = new int[l];
+            names = new String[l];
+            restCuisines = new String[l];
+            i=0;
+            while(!rests.isNull(i)){
+                JSONObject restar = rests.getJSONObject(i).getJSONObject("restaurant");
+                names[i] = restar.getString("name");
+                restCuisines[i] = restar.getString("cuisines");
+                lat[i] = restar.getJSONObject("location").getDouble("latitude");
+                lon[i] = restar.getJSONObject("location").getDouble("longitude");
+                priceForTwo[i] = restar.getDouble("average_cost_for_two");
+
+                ratings[i] = restar.getJSONObject("user_rating").getDouble("aggregate_rating");
+                votes[i] = restar.getJSONObject("user_rating").getInt("votes");
+
+                i++;
+            }
+
         } catch (JSONException e) {
             Log.e("ERROR",e.getMessage());
         }
-
     }
 
 }
