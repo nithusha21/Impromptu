@@ -1,7 +1,14 @@
 package com.codebreakers.apps.impromptu;
 
+import android.os.Bundle;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +48,9 @@ public class createEvent extends Fragment {
     Button proceed, invite;
     String jsonString;
 
+    LocationManager locationManager;
+    LocationListener locationListener;
+
     public createEvent() {
         // Required empty public constructor
     }
@@ -71,6 +81,8 @@ public class createEvent extends Fragment {
                 f.show(getActivity().getSupportFragmentManager(), "invite");
             }
         });
+
+
         return v;
     }
 
@@ -87,18 +99,24 @@ public class createEvent extends Fragment {
             Log.i("DATA", data.toString());
             JSONArray friends = new JSONArray();
             for (int i = 0; i < data.length(); i++) {
-                if (data.getJSONObject(i).getString("email") == MainControlActivity.getUser()) {
+                 if (data.getJSONObject(i).getString("email").toString().equals(MainControlActivity.getUser())) {
                     String s = data.getJSONObject(i).getString("friends");
                     friends = new JSONArray(s);
                     Log.i("Friends", friends.toString());
                 }
             }
-            String[] Friends = {"ajay", "akshay", "mohammed", "Rajat", "Mohammed"};
-            CheckBox[] FriendsInvite = new CheckBox[Friends.length];
+            JSONArray users = MainControlActivity.getJsonUsers().getJSONArray("data");
+            CheckBox[] FriendsInvite = new CheckBox[friends.length()];
 
             for (int i = 0; i < friends.length(); i++) {
                 FriendsInvite[i] = new CheckBox(getActivity());
-                FriendsInvite[i].setText(friends.getString(i));
+                String name = "";
+                for(int j = 0; j < users.length(); j++){
+                    if(users.getJSONObject(j).getString("email").equals(friends.getString(i))){
+                        name = users.getJSONObject(j).getString("name");
+                    }
+                }
+                FriendsInvite[i].setText(name);
                 FriendsInvite[i].setLayoutParams(new FrameLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
                 Struct.addView(FriendsInvite[i]);
             }

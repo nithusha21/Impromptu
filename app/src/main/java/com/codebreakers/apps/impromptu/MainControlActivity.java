@@ -1,12 +1,21 @@
 package com.codebreakers.apps.impromptu;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +24,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -26,26 +37,30 @@ import javax.net.ssl.HttpsURLConnection;
 
 import com.backendless.Backendless;
 import com.backendless.exceptions.BackendlessFault;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainControlActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     static JSONArray jsonResults;
     static String user;
     private static int index = 0;
+    private LocationManager locationManager;
+    GPSTracker gps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String user;
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main_control);
 
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
-        user = prefs.getString("usernawme", "UNKNOWN");
+        user = prefs.getString("username", "UNKNOWN");
         URL urls[] = new URL[3];
         jsonResults = new JSONArray();
         try {
@@ -72,6 +87,7 @@ public class MainControlActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -109,6 +125,26 @@ public class MainControlActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        gps = new GPSTracker(MainControlActivity.this);
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+
+            // \n is for new line
+            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
+
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
@@ -127,6 +163,9 @@ public class MainControlActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+
+
         return true;
     }
 
@@ -152,6 +191,8 @@ public class MainControlActivity extends AppCompatActivity
         } );
 
     }
+
+
     private class getJSON extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... urls){
@@ -232,7 +273,7 @@ public class MainControlActivity extends AppCompatActivity
     public static JSONObject getJsonUsers() {
         try {
             for(int i = 0; i < 3; i++){
-                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Users"))
+                if(jsonResults.getJSONObject(i).getJSONArray("data").getJSONObject(0).getString("___class").equals("Users"))
                     return jsonResults.getJSONObject(i);
             }
         }
@@ -245,7 +286,7 @@ public class MainControlActivity extends AppCompatActivity
     public static JSONObject getJsonEvents() {
         try {
             for(int i = 0; i < 3; i++){
-                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Event"))
+                if(jsonResults.getJSONObject(i).getJSONArray("data").getJSONObject(0).getString("___class").equals("Event"))
                     return jsonResults.getJSONObject(i);
             }
         }
@@ -258,7 +299,7 @@ public class MainControlActivity extends AppCompatActivity
     public static JSONObject getJsonFriends() {
         try {
             for(int i = 0; i < 3; i++){
-                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Friends"))
+                if(jsonResults.getJSONObject(i).getJSONArray("data").getJSONObject(0).getString("___class").equals("Friends"))
                     return jsonResults.getJSONObject(i);
             }
         }

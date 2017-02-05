@@ -1,10 +1,13 @@
 package com.codebreakers.apps.impromptu;
 
 import android.content.Intent;
+import android.Manifest;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.test.mock.MockPackageManager;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private CheckBox rememberLoginBox;
     RestaurantFinder tester = new RestaurantFinder();
+    private static final int REQUEST_CODE_PERMISSION = 2;
+    String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
 
 
     @Override
@@ -46,8 +51,27 @@ public class MainActivity extends AppCompatActivity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
 
         tx.setTypeface(custom_font);
-        tester.findRestaurants(12.9845,80.2330);
+        //tester.findRestaurants(12.9845,80.2330);
         initUI();
+
+
+        try {
+
+
+            if (ActivityCompat.checkSelfPermission(this, mPermission)
+                    != MockPackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this, new String[]{mPermission},
+                        REQUEST_CODE_PERMISSION);
+
+                // If any permission above not allowed by user, this condition will
+                // execute every time, else your else part will work
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
         Backendless.setUrl( Defaults.SERVER_URL );
         Backendless.initApp( this, Defaults.APPLICATION_ID, Defaults.SECRET_KEY, Defaults.VERSION );
