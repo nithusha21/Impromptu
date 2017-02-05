@@ -59,8 +59,7 @@
                 android:layout_centerHorizontal="true"
                 android:paddingTop="10px"
                 android:id="@+id/PriceSlider"
-                android:max="4000" />-->
-
+                android:max="4000" />
         </LinearLayout>
     </ScrollView>
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +16,15 @@ import android.widget.TextView;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 super.handleResponse( isValidLogin );
             }
         });
+
     }
     private void initUI()
     {
@@ -78,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
         passwordField = (EditText) findViewById( R.id.passwordField );
         rememberLoginBox = (CheckBox) findViewById( R.id.rememberLoginBox );
         loginButton = (Button) findViewById( R.id.loginButton );
-
-
-
         String tempString = getResources().getString( R.string.register_text );
         SpannableString underlinedContent = new SpannableString( tempString );
         underlinedContent.setSpan( new UnderlineSpan(), 0, tempString.length(), 0 );
@@ -109,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void onLoginButtonClicked()
     {
         String identity = identityField.getText().toString();
@@ -134,5 +143,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity( new Intent( this, RegisterActivity.class ) );
         finish();
     }
+
+
 
 }
