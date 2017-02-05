@@ -1,7 +1,14 @@
 package com.codebreakers.apps.impromptu;
 
+import android.os.Bundle;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +48,9 @@ public class createEvent extends Fragment {
     Button proceed, invite;
     String jsonString;
 
+    LocationManager locationManager;
+    LocationListener locationListener;
+
     public createEvent() {
         // Required empty public constructor
     }
@@ -71,6 +81,8 @@ public class createEvent extends Fragment {
                 f.show(getActivity().getSupportFragmentManager(), "invite");
             }
         });
+
+
         return v;
     }
 
