@@ -1,5 +1,6 @@
 package com.codebreakers.apps.impromptu;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
@@ -261,4 +262,17 @@ public class RestaurantFinder {
             arr[i]/=s;
         }
     }
+
+
+
+    public Location[] getRestaurantLocations(){
+        Location[] locs = new Location[lat.length];
+        for(int i=0;i<locs.length;i++){
+            locs[i] = new Location("");
+            locs[i].setLatitude(lat[i]);
+            locs[i].setLongitude(lon[i]);
+        }
+        return locs;
+    }
+
 }
