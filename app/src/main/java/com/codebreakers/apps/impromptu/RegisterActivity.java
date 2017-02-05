@@ -169,7 +169,7 @@ public class RegisterActivity extends Activity
     }
     Backendless.Messaging.getDeviceRegistration();
     Log.i("deviceID",Backendless.Messaging.getDeviceRegistration().getDeviceId());
-//    user.setProperty("deviceID", Backendless.Messaging.getDeviceRegistration().getDeviceId());
+    user.setProperty("deviceID", Backendless.Messaging.getDeviceRegistration().getDeviceId());
 
     Backendless.UserService.register( user, new DefaultCallback<BackendlessUser>( RegisterActivity.this )
     {
