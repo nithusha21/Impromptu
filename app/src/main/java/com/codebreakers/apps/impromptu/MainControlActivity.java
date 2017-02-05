@@ -48,7 +48,7 @@ public class MainControlActivity extends AppCompatActivity
         try {
             urls[0] = new URL("https://api.backendless.com/v1/data/Users");
             urls[1] = new URL("https://api.backendless.com/v1/data/Friends");
-            urls[2] = new URL("https://api.backendless.com/v1/data/Events");
+            urls[2] = new URL("https://api.backendless.com/v1/data/Event");
 
 
             for(index = 0; index < 3; index++){
