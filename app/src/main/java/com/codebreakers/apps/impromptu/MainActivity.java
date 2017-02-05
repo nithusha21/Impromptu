@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
 
         tx.setTypeface(custom_font);
-        tester.findRestaurants(12.9845,80.2330);
+        //tester.findRestaurants(12.9845,80.2330);
         initUI();
 
 
