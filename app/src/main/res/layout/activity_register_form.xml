@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name :"
+            android:id="@+id/name1"
             android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         <EditText
@@ -52,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="E-Mail ID :"
+            android:id="@+id/emailid"
             android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         <EditText
@@ -71,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Password :"
+            android:id="@+id/password1"
             android:textAppearance="@style/TextAppearance.AppCompat.Button" />
         <EditText
             android:layout_width="match_parent"
@@ -93,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Phone No :"
+            android:id="@+id/phoneno"
             android:textAppearance="@style/TextAppearance.AppCompat.Button" />
         <EditText
             android:layout_width="match_parent"
@@ -107,6 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
+        android:textStyle="bold"
         android:textColor="#000"
         android:background="@android:color/transparent"
         android:id="@+id/registerButton"
