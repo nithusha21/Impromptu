@@ -3,22 +3,31 @@
     android:layout_width="380dp"
     android:layout_height="800dp"
     tools:context="com.codebreakers.apps.impromptu.AddFriend"
-    android:background="@drawable/preference">
+    android:background="@drawable/preference"
+    android:paddingBottom="100dp">
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@drawable/newlogo"/>
+        android:layout_height="200dp"
+        android:src="@drawable/newlogo"
+        android:paddingBottom="50dp"/>
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:padding="150dp"
-        android:layout_width="380dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="100dp">
+    <Button
+       android:paddingTop="200dp"
+        android:layout_width="match_parent"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:textColor="#3d89ad"
         android:text="Add friend"
+        android:textStyle="bold"
         android:id="@+id/addfriend"
-        android:paddingTop="50dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
-
+</LinearLayout>
 </FrameLayout>

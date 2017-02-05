@@ -25,6 +25,7 @@ public class inviteDialogFragment extends DialogFragment {
         email.setLayoutParams(lp);
         email.setHint("Enter friends email");
         builder.setView(email);
+
         builder.setPositiveButton("Invite", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
