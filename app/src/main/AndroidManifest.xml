@@ -28,9 +28,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC7IEjgmEtJ_uqVLKD849B8eB5hbFnc3gk"/>
+
         <receiver android:name="com.backendless.push.BackendlessBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
@@ -66,7 +64,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-       
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+
 
         <activity
             android:name=".MainControlActivity"
@@ -78,7 +80,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".PreferenceForm"></activity>
+        <activity android:name=".PreferenceForm">
+        </activity>
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps">
+        </activity>
     </application>
 
 </manifest>
