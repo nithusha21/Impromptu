@@ -10,6 +10,8 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -22,6 +24,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -33,18 +37,21 @@ import javax.net.ssl.HttpsURLConnection;
 
 import com.backendless.Backendless;
 import com.backendless.exceptions.BackendlessFault;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainControlActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LocationListener{
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     static JSONArray jsonResults;
     static String user;
     private static int index = 0;
     private LocationManager locationManager;
+    GPSTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,17 +88,6 @@ public class MainControlActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        if ( Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission( this.getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission( this.getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.i("EXITING","");
-            return  ;
-        }
-
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
     }
 
@@ -130,6 +126,26 @@ public class MainControlActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        gps = new GPSTracker(MainControlActivity.this);
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+
+            // \n is for new line
+            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
+
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
@@ -148,6 +164,9 @@ public class MainControlActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+
+
         return true;
     }
 
@@ -174,25 +193,6 @@ public class MainControlActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        Log.i("LAT/LONG", location.getLatitude()+"\t"+location.getLongitude());
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.i("status change",status+"");
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        Log.i("provider enabled",provider);
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        Log.i("provier disabled",provider);
-    }
 
     private class getJSON extends AsyncTask<URL, Void, JSONObject> {
         @Override
