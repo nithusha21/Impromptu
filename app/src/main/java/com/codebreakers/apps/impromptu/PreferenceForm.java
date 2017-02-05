@@ -1,9 +1,11 @@
 package com.codebreakers.apps.impromptu;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
@@ -20,7 +22,14 @@ public class PreferenceForm extends AppCompatActivity {
         TextView tx = (TextView)findViewById(R.id.cuisine);
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
         tx.setTypeface(custom_font);
-
+        Button submit = (Button) findViewById(R.id.submitPreferences);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next = new Intent(PreferenceForm.this, MapsActivity.class);
+                startActivity(next);
+            }
+        });
         CuisListCheckBox();
 
     }
