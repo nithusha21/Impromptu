@@ -35,7 +35,12 @@ public class PreferenceForm extends AppCompatActivity {
                 CuiList[i].setLayoutParams(new FrameLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
                 Cuisine.addView(CuiList[i]);
             }
+        
+
+
         final TextView value = new TextView(this);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
+        value.setTypeface(custom_font);
         value.setText("0");
         SeekBar price = (SeekBar)findViewById(R.id.PriceSlider);
         price.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
