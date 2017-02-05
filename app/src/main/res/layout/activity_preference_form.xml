@@ -20,6 +20,7 @@
             android:id="@+id/PrefList">
         <LinearLayout
             android:paddingTop="30dp"
+            android:paddingLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -41,17 +42,28 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:paddingTop="50px"
+                android:soundEffectsEnabled="true"
                 android:id="@+id/PriceSlider"
+                android:scrollbarStyle="outsideInset"
                 android:max="4000" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Submit Preferences"
+                android:textColor="#3d89ad"
                 android:paddingTop="50dp"
                 android:id="@+id/submitPreferences"
                 android:layout_gravity="center_horizontal|top"
                 android:background="@android:color/transparent"/>
+            <!--<SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="10px"
+                android:id="@+id/PriceSlider"
+                android:max="4000" /-->
         </LinearLayout>
     </ScrollView>
 

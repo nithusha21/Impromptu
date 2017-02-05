@@ -70,7 +70,7 @@
 
         <activity
             android:name=".MainControlActivity"
-            android:label="@string/title_activity_main_control"
+            android:label="Home Page"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

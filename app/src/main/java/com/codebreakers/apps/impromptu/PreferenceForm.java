@@ -25,7 +25,7 @@ public class PreferenceForm extends AppCompatActivity {
 
     }
     public void CuisListCheckBox(){
-        String[] CuisineList= {"Chinese","Asian"};
+        String[] CuisineList= {"Chinese","Asian","Italian","French","Fast Food"};
         CheckBox[] CuiList=new CheckBox[CuisineList.length];
         LinearLayout Cuisine= (LinearLayout)findViewById(R.id.CuisList);
 

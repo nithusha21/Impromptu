@@ -63,7 +63,7 @@ public class createEvent extends Fragment {
             }
         });
 
-        invite = (Button) v.findViewById(R.id.invite);
+        invite = (Button) v.findViewById(R.id.invitenew);
         invite.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
