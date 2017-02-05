@@ -84,21 +84,21 @@ public class createEvent extends Fragment {
     public void FriendsListCheckBox() {
         try {
             JSONArray data = MainControlActivity.getJsonFriends().getJSONArray("data");
-            String[] friends;
             Log.i("DATA", data.toString());
-
+            JSONArray friends = new JSONArray();
             for (int i = 0; i < data.length(); i++) {
                 if (data.getJSONObject(i).getString("email") == MainControlActivity.getUser()) {
-                    String s = data.getJSONObject(i).getString("friend");
-                    Log.i("String", s);
+                    String s = data.getJSONObject(i).getString("friends");
+                    friends = new JSONArray(s);
+                    Log.i("Friends", friends.toString());
                 }
             }
             String[] Friends = {"ajay", "akshay", "mohammed", "Rajat", "Mohammed"};
             CheckBox[] FriendsInvite = new CheckBox[Friends.length];
 
-            for (int i = 0; i < Friends.length; i++) {
+            for (int i = 0; i < friends.length(); i++) {
                 FriendsInvite[i] = new CheckBox(getActivity());
-                FriendsInvite[i].setText(Friends[i]);
+                FriendsInvite[i].setText(friends.getString(i));
                 FriendsInvite[i].setLayoutParams(new FrameLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
                 Struct.addView(FriendsInvite[i]);
             }
