@@ -40,7 +40,10 @@ public class MainControlActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String user;
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main_control);
+
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
         user = prefs.getString("usernawme", "UNKNOWN");
         URL urls[] = new URL[3];
