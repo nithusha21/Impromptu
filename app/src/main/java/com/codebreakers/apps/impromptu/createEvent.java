@@ -53,7 +53,7 @@ public class createEvent extends Fragment {
         Struct= (LinearLayout) v.findViewById(R.id.FriendsList);
         proceed = (Button) v.findViewById(R.id.Proceed);
 
-        FriendsListCheckBox();
+        //FriendsListCheckBox();
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +63,7 @@ public class createEvent extends Fragment {
             }
         });
 
-        invite = (Button) v.findViewById(R.id.invite);
+        invite = (Button) v.findViewById(R.id.invitenew);
         invite.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

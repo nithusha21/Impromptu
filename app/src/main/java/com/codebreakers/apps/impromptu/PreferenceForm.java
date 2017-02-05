@@ -1,5 +1,6 @@
 package com.codebreakers.apps.impromptu;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -16,11 +17,15 @@ public class PreferenceForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference_form);
+        TextView tx = (TextView)findViewById(R.id.cuisine);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
+        tx.setTypeface(custom_font);
+
         CuisListCheckBox();
 
     }
     public void CuisListCheckBox(){
-        String[] CuisineList= {"Chinese","Asian"};
+        String[] CuisineList= {"Chinese","Asian","Italian","French","Fast Food"};
         CheckBox[] CuiList=new CheckBox[CuisineList.length];
         LinearLayout Cuisine= (LinearLayout)findViewById(R.id.CuisList);
 

@@ -34,25 +34,28 @@ import org.json.JSONObject;
 public class MainControlActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    static JSONObject jsonResults[];
+    static JSONArray jsonResults;
     static String user;
     private static int index = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String user;
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main_control);
+
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
         user = prefs.getString("usernawme", "UNKNOWN");
         URL urls[] = new URL[3];
-        jsonResults = new JSONObject[3];
+        jsonResults = new JSONArray();
         try {
             urls[0] = new URL("https://api.backendless.com/v1/data/Users");
             urls[1] = new URL("https://api.backendless.com/v1/data/Friends");
-            urls[2] = new URL("https://api.backendless.com/v1/data/Events");
+            urls[2] = new URL("https://api.backendless.com/v1/data/Event");
 
-            getJSON task = new getJSON();
+
             for(index = 0; index < 3; index++){
-                task.execute(urls[index]);
+                new getJSON().execute(urls[index]);
             }
         }
         catch (Exception e){
@@ -155,7 +158,7 @@ public class MainControlActivity extends AppCompatActivity
 
 
             try {
-                HttpURLConnection urlConnection = (HttpURLConnection) urls[index].openConnection();
+                HttpURLConnection urlConnection = (HttpURLConnection) urls[0].openConnection();
                 urlConnection.setRequestMethod("GET");
 
                 urlConnection.setConnectTimeout(30000);
@@ -185,7 +188,7 @@ public class MainControlActivity extends AppCompatActivity
 
                 index++;
 
-                Log.i("JSON: ",jsonString);
+                //Log.i("JSON: ",jsonString);
                 return new JSONObject(jsonString);
             }catch(Exception e){
                 e.printStackTrace();
@@ -196,9 +199,13 @@ public class MainControlActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
-           jsonResults[index] =jsonObject;
+            try {
+                jsonResults.put(jsonObject);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             if(jsonObject != null)
-            Log.i("Final Output",jsonObject.toString());
+                Log.i("Final Output",jsonObject.toString());
             /*try {
                 JSONArray rows = jsonObject.getJSONArray("data"); // Get all JSONArray rows
 
@@ -222,7 +229,8 @@ public class MainControlActivity extends AppCompatActivity
         }
     }
 
-    public static JSONObject getJsonUsers() {
+    /*public static JSONObject getJsonUsers() {
+
         return jsonResults[0];
     }
 
@@ -236,5 +244,5 @@ public class MainControlActivity extends AppCompatActivity
 
     public static String getUser() {
         return user;
-    }
+    }*/
 }

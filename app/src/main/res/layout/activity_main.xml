@@ -24,11 +24,10 @@
         android:layout_height="50dp"
         android:id="@+id/identityField"
         android:hint=" Username"
-        android:inputType="text"
         android:textColorHint="#000"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         style="@android:style/Widget.DeviceDefault.Light.AutoCompleteTextView"
-         />
+        android:inputType="text" />
 
     <EditText
         android:layout_width="match_parent"
@@ -58,8 +57,9 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:id="@+id/notauser"
         android:layout_height="wrap_content"
-        android:paddingTop="40dp"
+        android:paddingTop="220dp"
         android:text="Not A User Yet?"
         android:textAlignment="center"
         android:textStyle="bold"
