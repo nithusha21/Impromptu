@@ -53,7 +53,7 @@ public class createEvent extends Fragment {
         Struct= (LinearLayout) v.findViewById(R.id.FriendsList);
         proceed = (Button) v.findViewById(R.id.Proceed);
 
-        FriendsListCheckBox();
+        //FriendsListCheckBox();
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +81,7 @@ public class createEvent extends Fragment {
     }
 
     //Function to declare checkbox of friends
-    public void FriendsListCheckBox(){
+    /*public void FriendsListCheckBox(){
         try {
             JSONArray data = MainControlActivity.getJsonFriends().getJSONArray("data");
             String[] friends;
@@ -105,7 +105,7 @@ public class createEvent extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
 
 
 
