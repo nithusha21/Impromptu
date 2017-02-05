@@ -35,7 +35,7 @@ public class RestaurantFinder {
     double[] latAnswers, lonAnswers;
 
     private static final int MINIMUM_VOTES = 300;
-
+    public String[] answers;
 
 
     public void findRestaurants(double lat, double lon){
@@ -43,9 +43,10 @@ public class RestaurantFinder {
         try{
             reqURL = new URL(API_URL+"geocode?lat="+lat+"&lon="+lon);
             new URLRequestTask().execute(reqURL);
+            Log.i("findrests worked",lat+"\t"+lon);
 
         }catch(Exception e){
-            Log.e("ERROR",e.getMessage());
+            Log.e("findRestaurants Error",e.getMessage());
         }
     }
 
@@ -95,24 +96,62 @@ public class RestaurantFinder {
 
     private void postRequestFunction(String response){
         parseGeocodeResponse(response);
-        double[] laats = {12.991773,13,12.98}, loons = {80.232156,80.21,80.21};
-        String[] prefs = {"","",""};
-        double[] price = {500,350,750};
+//        double[] laats = {12.991773,13,12.98}, loons = {80.232156,80.21,80.21};
+//        String[] prefs = {"","",""};
+//        double[] price = {500,350,750};
 ////        Log.i("INFO", Arrays.toString(ratings));
 ////        Log.i("INFO", Arrays.toString(votes));
-        Log.i("INFO", Arrays.toString(priceForTwo));
+//        Log.i("INFO", Arrays.toString(priceForTwo));
 //        Log.i("INFO", Arrays.toString(restCuisines));
 ////        Log.i("INFO", Arrays.toString(getWeightedRatings()));
-        Log.i("old list", Arrays.toString(names));
-        Log.i("final rank list", Arrays.toString((rankRestaurants(laats,loons,prefs,price))));
-        Log.i("length",(rankRestaurants(laats,loons,prefs,price)).length+"");
+//        Log.i("old list", Arrays.toString(names));
+//        Log.i("final rank list", Arrays.toString((rankRestaurants(laats,loons,prefs,price))));
+//        Log.i("length",(rankRestaurants(laats,loons,prefs,price)).length+"");
 
+        double[] locs = {12.9917730,80.2321560,
+                12.9916475,80.2337331,
+                12.9937384,80.2323277,
+                12.9895776,80.2308471,
+                12.9856259,80.2328319,
+                12.9884067,80.2386362};
+
+        String[] preferences = {"Chinese",
+                "South Indian, Chinese",
+                "South Indian",
+                "North Indian, Chinese",
+                "South Indian, North Indian",
+                "Biryani"};
+
+        double[] pricePrefs = {400,
+                900,
+                300,
+                200,
+                400,
+                650};
+
+        Location[] locations = new Location[locs.length/2];
+
+        double lats[] = new double[locs.length/2], lons[] = new double[locs.length/2];
+
+        for(int i=0;i<locs.length-1;i+=2){
+
+            locations[i/2] = new Location("");
+            locations[i/2].setLatitude(locs[i]);
+            lats[i/2] = locs[i];
+            locations[i/2].setLongitude(locs[i+1]);
+            lons[i/2] = locs[i+1];
+
+        }
+
+        answers = rankRestaurants(lats,locs,preferences,pricePrefs);
+        Log.i("ANSWER", Arrays.toString(answers));
+        
     }
 
     private void parseGeocodeResponse(String response){
         String[] strs = response.split(urlDelimiter);
         String jsonReply = strs[0], url = strs[1];
-//        Log.i("INFO",url);
+        Log.i("parsegeocode",url);
         try {
             JSONObject restData = new JSONObject(jsonReply);
             cuisines = restData.getJSONObject("popularity").getJSONArray("top_cuisines");
@@ -122,6 +161,7 @@ public class RestaurantFinder {
             while(!rests.isNull(i)){
                 i++;
             }
+            Log.i("in parse geo code", i+"");
             int l = i;
             lat = new double[l];
             lon = new double[l];

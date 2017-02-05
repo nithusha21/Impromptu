@@ -36,9 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText identityField, passwordField;
     private Button loginButton;
     private CheckBox rememberLoginBox;
-    RestaurantFinder tester = new RestaurantFinder();
+    public static RestaurantFinder tester = new RestaurantFinder();
     private static final int REQUEST_CODE_PERMISSION = 2;
     String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
+
 
 
     @Override
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main);
-        tester.findRestaurants(12.9917730,80.2321560);
+        tester.findRestaurants(12.9867340,80.2239163);
         TextView tx = (TextView)findViewById(R.id.notauser);
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
@@ -111,43 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void example() {
 
-        double[] locs = {12.9917730,80.2321560,
-                12.9916475,80.2337331,
-                12.9937384,80.2323277,
-                12.9895776,80.2308471,
-                12.9856259,80.2328319,
-                12.9884067,80.2386362};
 
-        String[] preferences = {"Chinese",
-                "South Indian, Chinese",
-                "South Indian",
-                "North Indian, Chinese",
-                "South Indian, North Indian",
-                "Biryani"};
 
-        double[] pricePrefs = {400,
-        900,
-        300,
-        200,
-        400,
-        650};
+        tester.findRestaurants(12.9917730,80.2321560);
 
-        Location[] locations = new Location[locs.length/2];
-
-        double lats[] = new double[locations.length/2], lons[] = new double[locations.length/2];
-
-        for(int i=0;i<locs.length;i+=2){
-
-            locations[i] = new Location("");
-            locations[i].setLatitude(locs[i]);
-            lats[i/2] = locs[i];
-            locations[i].setLongitude(locs[i+1]);
-            lons[i/2] = locs[i+1];
-
-        }
-
-        tester.findRestaurants(locations[0].getLatitude(),locations[0].getLongitude());
-        String[] answers = tester.rankRestaurants(lats,locs,preferences,pricePrefs);
 
 
     }
