@@ -32,6 +32,7 @@ public class RestaurantFinder {
     public int[] votes;
     public String[] names;
     public String[] restCuisines;
+    double[] latAnswers, lonAnswers;
 
     private static final int MINIMUM_VOTES = 300;
 
@@ -97,14 +98,14 @@ public class RestaurantFinder {
         double[] laats = {12.991773,13,12.98}, loons = {80.232156,80.21,80.21};
         String[] prefs = {"","",""};
         double[] price = {500,350,750};
-//        Log.i("INFO", Arrays.toString(ratings));
-//        Log.i("INFO", Arrays.toString(votes));
-//        Log.i("INFO", Arrays.toString(priceForTwo));
+////        Log.i("INFO", Arrays.toString(ratings));
+////        Log.i("INFO", Arrays.toString(votes));
+        Log.i("INFO", Arrays.toString(priceForTwo));
 //        Log.i("INFO", Arrays.toString(restCuisines));
-//        Log.i("INFO", Arrays.toString(getWeightedRatings()));
+////        Log.i("INFO", Arrays.toString(getWeightedRatings()));
         Log.i("old list", Arrays.toString(names));
         Log.i("final rank list", Arrays.toString((rankRestaurants(laats,loons,prefs,price))));
-       // Log.i("length",(rankRestaurants(laats,loons,prefs,price)).length+"");
+        Log.i("length",(rankRestaurants(laats,loons,prefs,price)).length+"");
 
     }
 
@@ -231,6 +232,8 @@ public class RestaurantFinder {
         int index=0;
         double min = restGoodnessIndex[0];
         double largestSorted=0;
+        latAnswers = new double[numRests];
+        lonAnswers = new double[numRests];
         for(int i=0;i<numRests;i++){
             for(int j=0;j<numRests;j++){
                 if(restGoodnessIndex[j]<=largestSorted)continue;
@@ -240,6 +243,8 @@ public class RestaurantFinder {
                 }
             }
             rankList[i] = names[index];
+            latAnswers[i] = lat[index];
+            lonAnswers[i] = lon[index];
             largestSorted = min;
             min = Integer.MAX_VALUE;
         }
