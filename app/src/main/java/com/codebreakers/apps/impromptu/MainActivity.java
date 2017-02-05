@@ -41,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main);
         //tester.findRestaurants(12.9845,80.2330);
+        TextView tx = (TextView)findViewById(R.id.notauser);
+
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
+
+        tx.setTypeface(custom_font);
+        tester.findRestaurants(12.9845,80.2330);
         initUI();
 
         Backendless.setUrl( Defaults.SERVER_URL );

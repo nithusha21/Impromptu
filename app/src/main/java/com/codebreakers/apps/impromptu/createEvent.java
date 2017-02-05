@@ -81,7 +81,7 @@ public class createEvent extends Fragment {
     }
 
     //Function to declare checkbox of friends
-    public void FriendsListCheckBox(){
+    /*public void FriendsListCheckBox(){
         try {
             JSONArray data = MainControlActivity.getJsonFriends().getJSONArray("data");
             String[] friends;
@@ -105,7 +105,7 @@ public class createEvent extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
 
 
 
