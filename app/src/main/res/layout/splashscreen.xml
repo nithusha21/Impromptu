@@ -13,7 +13,6 @@
         android:id="@+id/progressBar"
         android:max="48"
         android:progress="1"
-        android:progressDrawable="@drawable/circular_screen"
         android:layout_gravity="center_horizontal"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />

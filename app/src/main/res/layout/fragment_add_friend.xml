@@ -1,14 +1,24 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.codebreakers.apps.impromptu.AddFriend">
+    android:layout_width="380dp"
+    android:layout_height="800dp"
+    tools:context="com.codebreakers.apps.impromptu.AddFriend"
+    android:background="@drawable/preference">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/newlogo"/>
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
+        android:padding="150dp"
+        android:layout_width="380dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:layout_height="wrap_content"
         android:text="Add friend"
-        android:paddingTop="50dp" />
+        android:id="@+id/addfriend"
+        android:paddingTop="50dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
 </FrameLayout>

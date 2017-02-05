@@ -27,23 +27,40 @@ import javax.net.ssl.HttpsURLConnection;
 import com.backendless.Backendless;
 import com.backendless.exceptions.BackendlessFault;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainControlActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    static JSONArray jsonResults;
+    static String user;
+    private static int index = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String user;
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main_control);
+
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
-        user = prefs.getString("username", "UNKNOWN");
+        user = prefs.getString("usernawme", "UNKNOWN");
+        URL urls[] = new URL[3];
+        jsonResults = new JSONArray();
+        try {
+            urls[0] = new URL("https://api.backendless.com/v1/data/Users");
+            urls[1] = new URL("https://api.backendless.com/v1/data/Friends");
+            urls[2] = new URL("https://api.backendless.com/v1/data/Event");
 
 
-
+            for(index = 0; index < 3; index++){
+                new getJSON().execute(urls[index]);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,16 +72,7 @@ public class MainControlActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        
-
-
-
     }
-
-
-
-
-
 
     @Override
     public void onBackPressed() {
@@ -144,5 +152,123 @@ public class MainControlActivity extends AppCompatActivity
         } );
 
     }
+    private class getJSON extends AsyncTask<URL, Void, JSONObject> {
+        @Override
+        protected JSONObject doInBackground(URL... urls){
 
+
+            try {
+                HttpURLConnection urlConnection = (HttpURLConnection) urls[0].openConnection();
+                urlConnection.setRequestMethod("GET");
+
+                urlConnection.setConnectTimeout(30000);
+                urlConnection.setReadTimeout(30000);
+
+                urlConnection.addRequestProperty("application-Id","48449D26-77AF-D84C-FFBC-96A6E338F700");
+                urlConnection.addRequestProperty("secret-key","823D3BBA-94A9-3405-FFCE-D3F4BD1C1100");
+                urlConnection.addRequestProperty("Content-type", "application/json");
+                urlConnection.connect();
+                if(urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    Log.i("HTTP", "Failed");
+                }
+                BufferedReader br=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+                char[] buffer = new char[1024];
+
+
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line+"\n");
+                }
+                br.close();
+
+                String jsonString = sb.toString();
+
+                index++;
+
+                //Log.i("JSON: ",jsonString);
+                return new JSONObject(jsonString);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            try {
+                jsonResults.put(jsonObject);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            if(jsonObject != null)
+                Log.i("Final Output",jsonObject.toString());
+            /*try {
+                JSONArray rows = jsonObject.getJSONArray("data"); // Get all JSONArray rows
+
+                //  for(int i=0; i < rows.length(); i++) { // Loop over each each row
+                //    JSONObject row = rows.getJSONObject(i); // Get row object
+                //  JSONArray elements = row.getJSONArray("elements"); // Get all elements for each row as an array
+
+                for(int j=0; j < rows.length(); j++) { // Iterate each element in the elements array
+                    JSONObject element =  rows.getJSONObject(j); // Get the element object
+                    JSONObject friendEmail = element.getJSONObject("friends"); // Get duration sub object
+
+
+                    Log.i("Friends ",friendEmail.toString()); // Print int value
+
+                }
+
+            } catch (JSONException e) {
+                // JSON Parsing error
+                e.printStackTrace();
+            }*/
+        }
+    }
+
+    public static JSONObject getJsonUsers() {
+        try {
+            for(int i = 0; i < 3; i++){
+                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Users"))
+                    return jsonResults.getJSONObject(i);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONObject getJsonEvents() {
+        try {
+            for(int i = 0; i < 3; i++){
+                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Event"))
+                    return jsonResults.getJSONObject(i);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static JSONObject getJsonFriends() {
+        try {
+            for(int i = 0; i < 3; i++){
+                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Friends"))
+                    return jsonResults.getJSONObject(i);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getUser() {
+        return user;
+    }
 }

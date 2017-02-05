@@ -2,10 +2,13 @@ package com.codebreakers.apps.impromptu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
@@ -37,7 +40,26 @@ public class RegisterActivity extends Activity
   {
     super.onCreate( savedInstanceState );
     setContentView( R.layout.activity_register_form );
+    TextView tx1 = (TextView)findViewById(R.id.name1);
 
+    Typeface custom_font1 = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
+
+    tx1.setTypeface(custom_font1);
+    TextView tx2 = (TextView)findViewById(R.id.emailid);
+
+    Typeface custom_font2 = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
+
+    tx2.setTypeface(custom_font2);
+    TextView tx3 = (TextView)findViewById(R.id.password1);
+
+    Typeface custom_font3 = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
+
+    tx3.setTypeface(custom_font3);
+    TextView tx4 = (TextView)findViewById(R.id.phoneno);
+
+    Typeface custom_font4 = Typeface.createFromAsset(getAssets(),  "fonts/abc.ttf");
+
+    tx4.setTypeface(custom_font3);
     initUI();
   }
 
@@ -145,7 +167,8 @@ public class RegisterActivity extends Activity
     {
       user.setProperty( "password", passwordstring );
     }
-
+    Backendless.Messaging.getDeviceRegistration();
+    Log.i("deviceID",Backendless.Messaging.getDeviceRegistration().getDeviceId());
     user.setProperty("deviceID", Backendless.Messaging.getDeviceRegistration().getDeviceId());
 
     Backendless.UserService.register( user, new DefaultCallback<BackendlessUser>( RegisterActivity.this )

@@ -1,29 +1,43 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.codebreakers.apps.impromptu.createEvent">
+    android:layout_width="380dp"
+    android:layout_height="800dp"
+    tools:context="com.codebreakers.apps.impromptu.createEvent"
+    android:background="@drawable/preference">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/FriendsScroll">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/FriendsList">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:src="@drawable/newlogo"/>
         <Button
+            android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Invite To Meetup"
+            android:textColor="#3d89ad"
+            android:textStyle="bold"
             android:id="@+id/Proceed"
-            android:layout_gravity="center_horizontal|top" />
+            android:layout_gravity="center_horizontal|top"
+            android:background="@android:color/transparent" />
         <Button
+            android:paddingTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Invite New Friend"
-            android:id="@+id/invite"
+            android:textColor="#3d89ad"
+            android:textStyle="bold"
+            android:id="@+id/invitenew"
+            android:background="@android:color/transparent"
             android:layout_gravity="center_horizontal|top" />
     </LinearLayout>
         </ScrollView>
