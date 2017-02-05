@@ -85,6 +85,7 @@ public class MainControlActivity extends AppCompatActivity
         if ( Build.VERSION.SDK_INT >= 23 &&
                 ContextCompat.checkSelfPermission( this.getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission( this.getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.i("EXITING","");
             return  ;
         }
 
@@ -190,7 +191,7 @@ public class MainControlActivity extends AppCompatActivity
 
     @Override
     public void onProviderDisabled(String provider) {
-
+        Log.i("provier disabled",provider);
     }
 
     private class getJSON extends AsyncTask<URL, Void, JSONObject> {
