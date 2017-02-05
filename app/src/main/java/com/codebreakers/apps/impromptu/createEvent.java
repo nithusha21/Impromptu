@@ -79,8 +79,11 @@ public class createEvent extends Fragment {
             public void onClick(View view) {
                 DialogFragment f =  new inviteDialogFragment();
                 f.show(getActivity().getSupportFragmentManager(), "invite");
+
             }
         });
+
+
 
 
         return v;
