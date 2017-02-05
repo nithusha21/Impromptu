@@ -11,6 +11,11 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,11 +32,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static android.R.attr.country;
+
 
 public class createEvent extends Fragment {
 
     LinearLayout Struct;
     Button proceed, invite;
+    String jsonString;
 
     public createEvent() {
         // Required empty public constructor
@@ -74,79 +82,33 @@ public class createEvent extends Fragment {
 
     //Function to declare checkbox of friends
     public void FriendsListCheckBox(){
-        get();
-        String[] Friends= {"ajay","akshay","mohammed","Rajat","Mohammed"};
-        CheckBox[] FriendsInvite = new CheckBox[Friends.length];
-
-        for(int i=0;i<Friends.length;i++){
-            FriendsInvite[i]=new CheckBox(getActivity());
-            FriendsInvite[i].setText(Friends[i]);
-            FriendsInvite[i].setLayoutParams(new FrameLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
-            Struct.addView(FriendsInvite[i]);
-        }
-    }
-
-    public void get() {
-        String urlString = "https://api.backendless.com/v1/data/Users";
         try {
-            URL url = new URL(urlString);
+            JSONArray data = MainControlActivity.getJsonFriends().getJSONArray("data");
+            String[] friends;
+            Log.i("DATA", data.toString());
 
-            createEvent.getJSON task = new createEvent.getJSON();
-            task.execute(new URL(urlString));
-        } catch (Exception e) {
+            for(int i = 0; i < data.length(); i++){
+                if(data.getJSONObject(i).getString("email") == MainControlActivity.getUser()){
+                    String s = data.getJSONObject(i).getString("friend");
+                    Log.i("String", s);
+                }
+            }
+            String[] Friends = {"ajay", "akshay", "mohammed", "Rajat", "Mohammed"};
+            CheckBox[] FriendsInvite = new CheckBox[Friends.length];
+
+            for (int i = 0; i < Friends.length; i++) {
+                FriendsInvite[i] = new CheckBox(getActivity());
+                FriendsInvite[i].setText(Friends[i]);
+                FriendsInvite[i].setLayoutParams(new FrameLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
+                Struct.addView(FriendsInvite[i]);
+            }
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    private class getJSON extends AsyncTask<URL, Void, JSONObject> {
-        @Override
-        protected JSONObject doInBackground(URL... urls){
 
 
-            try {
-                HttpURLConnection urlConnection = (HttpURLConnection) urls[0].openConnection();
-                urlConnection.setRequestMethod("GET");
-
-                urlConnection.setConnectTimeout(30000);
-                urlConnection.setReadTimeout(30000);
-
-                urlConnection.addRequestProperty("application-Id", "48449D26-77AF-D84C-FFBC-96A6E338F700");
-                urlConnection.addRequestProperty("secret-key","823D3BBA-94A9-3405-FFCE-D3F4BD1C1100");
-                urlConnection.addRequestProperty("Content-type", "application/json");
-                urlConnection.connect();
-                if(urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                    Log.i("HTTP", "Failed");
-                }
-                BufferedReader br=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-                char[] buffer = new char[1024];
-
-                String jsonString;
-
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line+"\n");
-                }
-                br.close();
-
-                jsonString = sb.toString();
-
-                Log.i("JSON: ",jsonString);
-                return new JSONObject(jsonString);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject jsonObject) {
-            super.onPostExecute(jsonObject);
-            Log.i("Output",jsonObject.toString());
-
-        }
-    }
 
 
 
