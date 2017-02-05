@@ -40,12 +40,11 @@ public class MainControlActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String user;
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_main_control);
 
         SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
-        user = prefs.getString("usernawme", "UNKNOWN");
+        user = prefs.getString("username", "UNKNOWN");
         URL urls[] = new URL[3];
         jsonResults = new JSONArray();
         try {
@@ -232,7 +231,7 @@ public class MainControlActivity extends AppCompatActivity
     public static JSONObject getJsonUsers() {
         try {
             for(int i = 0; i < 3; i++){
-                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Users"))
+                if(jsonResults.getJSONObject(i).getJSONArray("data").getJSONObject(0).getString("___class").equals("Users"))
                     return jsonResults.getJSONObject(i);
             }
         }
@@ -245,7 +244,7 @@ public class MainControlActivity extends AppCompatActivity
     public static JSONObject getJsonEvents() {
         try {
             for(int i = 0; i < 3; i++){
-                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Event"))
+                if(jsonResults.getJSONObject(i).getJSONArray("data").getJSONObject(0).getString("___class").equals("Event"))
                     return jsonResults.getJSONObject(i);
             }
         }
@@ -258,7 +257,7 @@ public class MainControlActivity extends AppCompatActivity
     public static JSONObject getJsonFriends() {
         try {
             for(int i = 0; i < 3; i++){
-                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Friends"))
+                if(jsonResults.getJSONObject(i).getJSONArray("data").getJSONObject(0).getString("___class").equals("Friends"))
                     return jsonResults.getJSONObject(i);
             }
         }
