@@ -53,7 +53,7 @@ public class createEvent extends Fragment {
         Struct= (LinearLayout) v.findViewById(R.id.FriendsList);
         proceed = (Button) v.findViewById(R.id.Proceed);
 
-        //FriendsListCheckBox();
+        FriendsListCheckBox();
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,14 +81,14 @@ public class createEvent extends Fragment {
     }
 
     //Function to declare checkbox of friends
-    /*public void FriendsListCheckBox(){
+    public void FriendsListCheckBox() {
         try {
             JSONArray data = MainControlActivity.getJsonFriends().getJSONArray("data");
             String[] friends;
             Log.i("DATA", data.toString());
 
-            for(int i = 0; i < data.length(); i++){
-                if(data.getJSONObject(i).getString("email") == MainControlActivity.getUser()){
+            for (int i = 0; i < data.length(); i++) {
+                if (data.getJSONObject(i).getString("email") == MainControlActivity.getUser()) {
                     String s = data.getJSONObject(i).getString("friend");
                     Log.i("String", s);
                 }
@@ -102,14 +102,8 @@ public class createEvent extends Fragment {
                 FriendsInvite[i].setLayoutParams(new FrameLayout.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
                 Struct.addView(FriendsInvite[i]);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
-
-
-
-
-
-
+    }
 }

@@ -226,20 +226,46 @@ public class MainControlActivity extends AppCompatActivity
         }
     }
 
-    /*public static JSONObject getJsonUsers() {
-
-        return jsonResults[0];
+    public static JSONObject getJsonUsers() {
+        try {
+            for(int i = 0; i < 3; i++){
+                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Users"))
+                    return jsonResults.getJSONObject(i);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static JSONObject getJsonEvents() {
-        return jsonResults[2];
+        try {
+            for(int i = 0; i < 3; i++){
+                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Event"))
+                    return jsonResults.getJSONObject(i);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static JSONObject getJsonFriends() {
-        return jsonResults[1];
+        try {
+            for(int i = 0; i < 3; i++){
+                if(jsonResults.getJSONObject(0).getJSONArray("data").getJSONObject(0).getString("___class").equals("Friends"))
+                    return jsonResults.getJSONObject(i);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static String getUser() {
         return user;
-    }*/
+    }
 }
